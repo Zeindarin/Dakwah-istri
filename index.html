@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Comic+Neue:wght@700&family=Playfair+Display&display=swap');
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background-image: url('satu.jpeg');
+            background-size: cover;
+            background-position: center;
+            overflow-y: auto;
+            transition: all 0.5s ease; /* Menambahkan transisi untuk body */
+        }
+
+        .center-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            opacity: 1;
+            transition: opacity 0.5s ease; /* Transisi opacity saat login */
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 50px;
+            color: white;
+            margin-bottom: 0;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+        }
+
+        h3 {
+            font-family: 'Comic Neue', cursive;
+            font-size: 24px;
+            color: white;
+            margin-top: 5px;
+            text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+        }
+
+        h2 {
+            margin-bottom: 20px;
+            color: white;
+            text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+        }
+
+        input[type="text"] {
+            width: 300px;
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 20px;
+            border: none;
+            outline: none;
+            box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        input[type="text"]:focus {
+            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+            filter: blur(0.5px);
+        }
+
+        button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #002366;
+            color: white;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #001a4d;
+        }
+
+        #welcomeMessage {
+            display: none;
+            font-size: 40px;
+            color: white;
+            font-family: 'Comic Neue', cursive;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+            text-align: center;
+            margin-top: 20px;
+            opacity: 0;
+            transition: opacity 0.5s ease; /* Transisi masuknya pesan selamat datang */
+        }
+
+        .hidden {
+            opacity: 0;
+        }
+
+        /* Article styles */
+        #article {
+            display: none;            
+            8ont-size: 14px;
+            color: white;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.7);
+            border-radius: 10px;
+            margin: 20px auto;
+            width: 80%;
+            text-align: left;
+            opacity: 0;
+            transition: opacity 3s ease; /* Transisi masuknya artikel */
+       }
+        #article h2 {
+            color: white;
+            font-size: 1.8em;
+            margin-bottom: 10px;
+       }
+        article p {
+            font-size: 1.1em;
+            line-height: 1.6;
+        }
+        article ul {
+            padding-left: 20px;
+        }
+        footer {
+            background-color: #2c3e50;
+            padding: 10px;
+            text-align: center;
+            color: white;
+        }
+
+        body.scrolling {
+            overflow-y: scroll;
+        }
+       footer p {
+            margin: 0;
+        }
+        
+                /* Menghilangkan border dari input dan textarea */
+        input, textarea {
+            border: none;
+            border-bottom: 1px solid #ccc; /* Bisa tambahkan garis bawah */
+            padding: 10px;
+            width: 100%;
+            box-sizing: border-box; /* Untuk menyesuaikan padding */
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+
+        input:focus, textarea:focus {
+            outline: none; /* Menghilangkan garis highlight saat focus */
+            border-bottom: 1px solid #555; /* Ubah warna garis bawah saat fokus */
+        }
+
+        /* Mengatur tampilan tombol kirim */
+        input[type="submit"] {
+            background-color: #4CAF50; /* Warna tombol */
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049; /* Warna tombol saat di-hover */
+        }
+
+        /* Watermark */
+        #watermark {
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
+            font-size: 12px;
+            color: white;
+            opacity: 0.5;
+            font-family: 'Comic Neue', cursive;
+        }
+    </style>
+</head>
+<body>
+
+<div class="center-container" id="loginContainer">
+    <!-- Teks judul di atas login -->
+    <h1>Kajian Online</h1>
+    <h3>Istri adalah Partner Dakwah Suaminya</h3>
+
+    <h2>masukan nama</h2>
+    <input type="text" id="namaLengkap" placeholder="Nama lengkap" required>
+    <br>
+    <button onclick="login()">masuk</button>
+</div>
+
+<div id="welcomeMessage"></div>
+
+<!-- Artikel -->
+<div id="article">
+				<h2>Pembukaan</h2>
+    <p>
+        Alhamdulillahirabbil Alamin wabihi nastainu ala umuridduna waddin asholatu assalamuala asrofil ambiyaiwalmursalin sayyidina Muhammad wa ala Alihi wa shohbihi wabarik wassalim ajmain amma badu.</p>
+        <p>Alhamdulillah segala puji Allah Tuhan semesta alam, marilah sama sama kita ucapkan nikmat syukur yang telah Allah berikan kepada kita baik itu rezeki, kesehatan, keselamatan juga waktu yang melimpah. Tidak lupa sholawatan serta salam semoga tetap tercurahkan kepada junjungan kita nabi besar Muhammad shalallahu alaihi wa salam, juga kepada para penerusnya hingga akhir zaman.</p>
+
+				<h2>Istri sebagai Partner Dakwah Suaminya Peran, Tantangan, dan Implementasi</h2>
+				<p>pernikahan bukan hanya sekadar ikatan emosional dan fisik antara suami dan istri, tetapi juga merupakan bentuk ibadah yang bertujuan membangun masyarakat yang berlandaskan nilai-nilai tauhid. Dalam konteks ini, seorang istri memegang peran yang sangat penting sebagai partner dakwah bagi suaminya. Dakwah, yang berarti mengajak orang lain kepada jalan Allah, adalah tanggung jawab yang tidak hanya dibebankan kepada laki-laki, tetapi juga kepada perempuan. Tetapi betapa menyenangkannya ketika keduanya saling mendukung?</p>
+				<h2>Peran Istri dalam Dakwah Suaminya</h2>
+				<p>Dakwah sering menghadapi tantangan. Istri berperan memberikan semangat dan mendukung suaminya agar tetap kuat dalam berdakwah. Dukungan ini bisa berupa doa, nasihat, atau sekadar mendengarkan keluh kesah suaminya dengan sabar ya...</p>
+				
+				<p><em>Dan hendaklah ada di antara kamu segolongan umat yang menyeru kepada kebaikan, menyuruh kepada yang ma'ruf, dan mencegah dari yang munkar. Dan mereka itulah orang-orang yang beruntung."</em></p><em>(Surah Ali Imran: 104)</em></p>
+				
+				<h2>Menunjukkan akhlak yang baik</h2>
+				<p>Istri yang berakhlak baik dan menjalankan ajaran Islam dengan sungguh-sungguh menjadi contoh nyata dari pesan dakwah yang disampaikan suaminya. Melalui sikapnya, ia turut menyebarkan nilai-nilai Islam kepada orang-orang di sekitarnya.</p>
+				
+				<h2>Istri Sebagai Penolong yang Setia untuk keluarga dan anak-anaknya </h2>
+				<p><p>Dan para wanita mempunyai hak yang seimbang dengan kewajibannya menurut cara yang ma'ruf. Akan tetapi para suami, mempunyai satu tingkatan kelebihan daripada istrinya. Dan Allah Maha Perkasa lagi Maha Bijaksana.</em></p>
+				<p><em>(Surah Al-Baqarah: 228)</em></p>
+				
+				<h2>Teladan dari Khadijah RA</h2>
+				<p>Khadijah RA, istri Nabi Muhammad SAW, memberikan dukungan penuh kepada suaminya dalam berdakwah. Ketika Nabi SAW menerima wahyu pertama, Khadijah yang pertama kali menenangkannya dan memberikan semangat untuk melanjutkan dakwah.</p>
+				
+				<h2>Tantangan yang Dihadapi Istri dalam Dakwah</h2>
+				<p>1. Keterbatasan Waktu dan Energi adalah tantangan terbesar mengelola rumah tangga, mendidik anak, dan mendukung suami dalam dakwah membutuhkan dedikasi dan pengorbanan besar. Istri harus pandai mengatur waktu dan menyeimbangkan berbagai tanggung jawabnya agar tidak ada yang terabaikan.</p>
+				
+				<p>2. Tekanan Sosial Dakwah sering kali menghadapi penolakan atau tantangan dari lingkungan sosial, baik dari keluarga besar, tetangga, atau masyarakat luas. Tekanan ini dapat menimbulkan beban psikologis bagi istri, terutama jika ia merasa tidak didukung oleh lingkungannya. Dalam situasi seperti ini, istri harus memiliki keteguhan hati dan iman yang kuat agar tetap bisa berdiri teguh mendampingi suaminya.</p>
+				<p>3. Perbedaan Pemahaman tentang Dakwah Kadang-kadang, istri dan suami mungkin memiliki perbedaan pandangan tentang metode atau pendekatan dakwah yang seharusnya dilakukan. Perbedaan ini bisa menjadi sumber konflik jika tidak dikelola dengan baik. Oleh karena itu, penting bagi suami dan istri untuk saling berdiskusi dan mencari kesepakatan dalam menjalankan misi dakwah bersama.</p>
+				<p>4. Menjaga Keseimbangan Antara Dakwah dan Kebutuhan Pribadi Dalam mendukung dakwah suami, seorang istri juga harus menjaga keseimbangan antara kebutuhan pribadinya dengan tanggung jawabnya dalam dakwah. Istri harus tetap merawat kesehatan fisik dan mentalnya agar dapat berperan maksimal sebagai partner dakwah. Selain itu, istri juga perlu memiliki waktu untuk pengembangan diri dan ibadah pribadi, sehingga ia bisa terus menguatkan iman dan ketakwaannya.</p>
+				<h2>Implementasi dalam Kehidupan Sehari-hari</h2>
+				<p>1. Komunikasi Terbuka dan Efektif Komunikasi yang baik antara suami dan istri adalah kunci dalam menjalankan misi dakwah bersama.</p>
+				<p>2. Saling Menguatkan dalam Iman Suami dan istri harus saling menguatkan dalam keimanan. Melalui ibadah bersama seperti shalat berjamaah, membaca Al-Qur’an, atau menghadiri majelis ilmu</p>
+				<p>3. Mengelola masalah dengan Hikmah
+Perbedaan pandangan atau ketegangan dalam rumah tangga tidak bisa dihindari.</p>
+      <p>4. Bersabar dalam Ujian dan Tantangan Jalan dakwah tidak selalu mulus, dan akan ada banyak ujian serta tantangan yang dihadapi.</p>
+      <h2>Kesimpulan</h2>
+ Peran istri sebagai partner dakwah suaminya adalah peran yang mulia dan krusial dalam Islam. Istri tidak hanya mendukung suami dari segi apapun. tetapi juga terlibat aktif dalam menciptakan lingkungan yang kondusif bagi dakwah, mendidik anak-anak, dan menyebarkan nilai-nilai Islam di masyarakat. Meski tantangan dalam menjalankan peran ini cukup besar, dengan kesabaran, keteguhan iman, dan komunikasi yang baik antara suami dan istri, misi dakwah bersama dapat terlaksana dengan baik, membawa kebaikan tidak hanya bagi keluarga, tetapi juga bagi umat secara keseluruhan.</em></p>
+ 
+ <!-- Bagian Baca Juga Artikel Lainnya -->
+    <div class="related-articles">
+        <h2>Baca juga artikel yang lainnya</h2>
+        <il><p><a href="https://zeindarin.github.io/Ujian-yang-dianggap-nikmat/" target="_blank">Ujian yang dianggap nikmat</a></p></il>
+        <il><a href="https://zeindarin.github.io/Mencintai-dalam-diam/" target="blank">mencintai dalam diam</a></il>
+        <p><a href="https://zeindarin.github.io/Jangan-kangen/" target="blank">Jangan kangen</a></p>
+    </div>
+    
+    
+    <h2>Kolom Komentar, Kritik dan Saran*</h2>
+    <p5 align ="left">jika diperlukan*</p5>
+
+    <form action="mailto:referralsofsciense@gmail.com" method="POST" enctype="text/plain">
+        <label for="name">Nama:</label><br>
+        <input type="text" id="name" name="name" placeholder="Masukkan nama Anda" required><br><br>
+        
+        <label for="email">Email:</label><br>
+        <input type="email" id="email" name="email" placeholder="Masukkan email Anda" required><br><br>
+        
+        <label for="comment">Komentar:</label><br>
+        <textarea id="comment" name="comment" rows="5" placeholder="Tulis komentar Anda di sini..." required></textarea><br><br>
+        
+        <input type="submit" value="Kirim Komentar">
+    </form></article>
+    
+        
+        				<h2>Dukung Kami agar dalam membangun dakwah</h2><p align ="center"><a href="https://saweria.co/Zeindarin" target="_blank">kirim semangkuk bakso</a></p>
+    
+</main>
+
+
+<footer>
+    <p>&copy; 2024 - Artikel oleh Zeindarin</p>
+</footer>
+				
+</div>
+
+<!-- Watermark -->
+<p align ="center"><div id="watermark">Zeindarin</div></p>
+
+<script>
+    function login() {
+        const nama = document.getElementById('namaLengkap').value;
+        if (nama) {
+            // Menghilangkan kotak login dengan transisi
+            const loginContainer = document.getElementById('loginContainer');
+            loginContainer.classList.add('hidden');
+            setTimeout(() => loginContainer.style.display = 'none', 500); // Delay untuk memastikan transisi selesai
+
+            // Menampilkan pesan selamat datang dengan transisi
+            const message = document.getElementById('welcomeMessage');
+            message.textContent = `Selamat datang, ${nama}!`;
+            message.style.display = 'block';
+            setTimeout(() => message.style.opacity = 1, 100); // Transisi masuk setelah muncul
+
+            // Menampilkan artikel dengan transisi
+            const article = document.getElementById('article');
+            article.style.display = 'block';
+            setTimeout(() => article.style.opacity = 1, 100); // Transisi masuk setelah muncul
+
+            // Membuat body bisa di-scroll
+            document.body.classList.add('scrolling');
+        }
+    }
+    
+</script>
+
+</body>
+</html>
